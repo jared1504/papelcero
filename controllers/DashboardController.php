@@ -14,18 +14,33 @@ class DashboardController
         session_start();
         isAuth();
         $id = $_SESSION['id'];
-        $proyectos = Proyecto::belongsTo('propietarioId', $id);
+        //$proyectos = Proyecto::belongsTo('propietarioId', $id);
+        $proyectos=[];
         $router->render('dashboard/index', [
-            'titulo' => 'Proyectos',
+            'titulo' => 'Documentos Pendientes',
             'proyectos' => $proyectos
         ]);
     }
-    public static function crear_proyecto(Router $router)
+    public static function firmados(Router $router)
+    {
+        //Iniciar la sesión del usuario
+        session_start();
+        isAuth();
+        $id = $_SESSION['id'];
+        //$proyectos = Proyecto::belongsTo('propietarioId', $id);
+        $proyectos=[];
+        $router->render('dashboard/firmados', [
+            'titulo' => 'Documentos Firmados',
+            'proyectos' => $proyectos
+        ]);
+    }
+    public static function crear_documento(Router $router)
     {
         //Iniciar la sesión del usuario
         session_start();
         isAuth();
         $alertas = [];
+        $usuarios= [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $proyecto = new Proyecto($_POST);
             //Validacio
@@ -42,9 +57,10 @@ class DashboardController
                 header('Location: /proyecto?url=' . $proyecto->url);
             }
         }
-        $router->render('dashboard/crear-proyecto', [
-            'titulo' => 'Crear Proyecto',
-            'alertas' => $alertas
+        $router->render('dashboard/crear-documento', [
+            'titulo' => 'Crear Documento',
+            'alertas' => $alertas,
+            'usuarios'=>$usuarios
         ]);
     }
 

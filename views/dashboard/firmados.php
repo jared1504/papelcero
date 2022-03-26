@@ -1,6 +1,6 @@
 <?php include_once __DIR__ . '/header-dashboard.php'; ?>
 <?php if (count($proyectos) === 0) { ?>
-    <p class="no-proyectos">No hay Documentos pendientes por firmar</p>
+    <p class="no-proyectos">No hay Documentos firmados</p>
 <?php } else { ?>
     <ul class="listado-proyectos">
         <?php foreach ($proyectos as $proyecto) { ?>
